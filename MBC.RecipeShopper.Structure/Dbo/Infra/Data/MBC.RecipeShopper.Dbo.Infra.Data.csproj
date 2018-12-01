@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Infra.Data\MBC.RecipeShopper.Shared.Infra.Data.csproj" />
+    <ProjectReference Include="..\..\Domain\MBC.RecipeShopper.Dbo.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
