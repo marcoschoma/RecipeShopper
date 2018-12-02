@@ -1,9 +1,9 @@
 ﻿using MBC.RecipeShopper.Shared.Infra;
-using MBCTech.RecipeShopper.Shared.Infra.Data.Transactions;
+using MBC.RecipeShopper.Shared.Infra.Data.Transactions;
 using System;
 using System.Linq;
 
-namespace MBCTech.RecipeShopper.Shared.Application
+namespace MBC.RecipeShopper.Shared.Application
 {
     /// <summary>
     /// Application service base.

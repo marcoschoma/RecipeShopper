@@ -4,4 +4,38 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Commands\Inputs\PageAmountTypeCommand.cs" />
+    <Compile Remove="Commands\Results\AmountTypeCommandResult.cs" />
+    <Compile Remove="Commands\Results\IngredientCommandResult.cs" />
+    <Compile Remove="Commands\Results\PageAmountTypeCommandResult.cs" />
+    <Compile Remove="Commands\Results\PageIngredientCommandResult.cs" />
+    <Compile Remove="Commands\Results\PageRecipeCommandResult.cs" />
+    <Compile Remove="Commands\Results\PageRecipeIngredientCommandResult.cs" />
+    <Compile Remove="Commands\Results\PageShoplistCommandResult.cs" />
+    <Compile Remove="Commands\Results\RecipeCommandResult.cs" />
+    <Compile Remove="Commands\Results\RecipeIngredientCommandResult.cs" />
+    <Compile Remove="Commands\Results\SelectListAmountTypeCommandResult.cs" />
+    <Compile Remove="Commands\Results\SelectListIngredientCommandResult.cs" />
+    <Compile Remove="Commands\Results\SelectListRecipeCommandResult.cs" />
+    <Compile Remove="Commands\Results\SelectListRecipeIngredientCommandResult.cs" />
+    <Compile Remove="Commands\Results\SelectListShoplistCommandResult.cs" />
+    <Compile Remove="Commands\Results\ShoplistCommandResult.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Domain\MBC.RecipeShopper.Shared.Domain.csproj" />
+    <ProjectReference Include="..\..\Shared\Infra\MBC.RecipeShopper.Shared.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="netstandard">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\netstandard.library\2.0.3\build\netstandard2.0\ref\netstandard.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Enumerations\" />
+  </ItemGroup>
+
 </Project>

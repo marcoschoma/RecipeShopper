@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text; 
 using System.Linq;
 using System.Linq.Expressions;
-using MBCTech.RecipeShopper.Dbo.Domain.Entities;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Results.Ingredient;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Dbo.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Results.Ingredient;
+using MBC.RecipeShopper.Dbo; 
 
-namespace MBCTech.RecipeShopper.Dbo.Domain.Specs {
+namespace MBC.RecipeShopper.Dbo.Domain.Specs {
     
     
     public class IngredientSpecs {

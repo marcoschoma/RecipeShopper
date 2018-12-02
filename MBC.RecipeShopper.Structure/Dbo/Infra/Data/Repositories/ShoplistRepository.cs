@@ -1,27 +1,24 @@
-using System; 
-using System.Collections.Generic; 
-using System.Text; 
-using System.Linq;
-using System.Threading.Tasks;
-using MBCTech.RecipeShopper.Dbo.Domain.Entities;
-using MBCTech.RecipeShopper.Dbo.Domain.Repositories;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Inputs.Shoplist;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Results.Shoplist;
-using MBCTech.RecipeShopper.Dbo.Domain.Specs;
-using MBCTech.RecipeShopper.Dbo.Infra.Data.Contexts;
-using MBCTech.RecipeShopper.Shared.Infra.Data.Repositories;
-
 using Dapper;
 using LinqKit;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Shoplist;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Results.Shoplist;
+using MBC.RecipeShopper.Dbo.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Repositories;
+using MBC.RecipeShopper.Dbo.Domain.Specs;
+using MBC.RecipeShopper.Dbo.Infra.Data.Contexts;
+using MBC.RecipeShopper.Shared.Domain.Commands;
+using MBC.RecipeShopper.Shared.Infra;
+using MBC.RecipeShopper.Shared.Infra.Data.Repositories;
+using MBC.RecipeShopper.Shared.Infra.Data.Transactions;
 using Microsoft.EntityFrameworkCore;
-//using Tolitech.Modules.Shared.Domain.Commands;
-//using Tolitech.Modules.Shared.Domain.Entities;
-//using Tolitech.Modules.Shared.Notification;
-//using Tolitech.Modules.Shared.Infra.Data.Extensions;
-using MBCTech.RecipeShopper.Dbo;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MBCTech.RecipeShopper.Dbo.Infra.Data.Repositories {
-    
+namespace MBC.RecipeShopper.Dbo.Infra.Data.Repositories
+{
+
     public class ShoplistRepository : Repository, IShoplistRepository {
         
         private IUnitOfWork _uow;
@@ -107,7 +104,6 @@ namespace MBCTech.RecipeShopper.Dbo.Infra.Data.Repositories {
 			
 			var count = await source.Where(outer).CountAsync();
 			var items = await source.Where(outer)
-			    .DynamicOrderBy(command.OrderBy)
 			    .Skip(command.SkipNumber)
 			    .Take(command.PageSize)
 			    .Select(ShoplistSpecs.AsPageShoplistCommandResult)

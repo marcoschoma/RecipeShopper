@@ -1,12 +1,12 @@
 using System; 
 using System.Collections.Generic; 
 using System.Text; 
-using MBCTech.RecipeShopper.Shared.Domain.Entities;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe;
-using MBCTech.RecipeShopper.Dbo.Domain.Scopes.Recipe;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Shared.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe;
+using MBC.RecipeShopper.Dbo.Domain.Scopes.Recipe;
+using MBC.RecipeShopper.Dbo; 
 
-namespace MBCTech.RecipeShopper.Dbo.Domain.Entities {
+namespace MBC.RecipeShopper.Dbo.Domain.Entities {
     
     
     public class RecipeInfo : EntityInfo {
@@ -16,37 +16,41 @@ namespace MBCTech.RecipeShopper.Dbo.Domain.Entities {
         
         public RecipeInfo(InsertRecipeCommand command) {
 			Map(command);
-			this.InsertOrUpdateScopeValidate();
+            InitCollections();
+            this.InsertOrUpdateScopeValidate();
         }
         
         public RecipeInfo(UpdateRecipeCommand command) {
 			Map(command);
-			this.InsertOrUpdateScopeValidate();
+            InitCollections();
+            this.InsertOrUpdateScopeValidate();
         }
         
         public System.Nullable<int> Id {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public string Name {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public string Steps {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public void SetId(int id) {
 			if (!Id.HasValue) Id = id;
         }
+
+        private void InitCollections()
+        {
+            RecipeIngredients = new List<RecipeIngredientInfo>();
+        }
+
+        public virtual ICollection<RecipeIngredientInfo> RecipeIngredients { get; set; }
+
     }
 }

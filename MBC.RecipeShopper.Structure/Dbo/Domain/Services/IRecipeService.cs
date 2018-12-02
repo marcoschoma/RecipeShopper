@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic; 
 using System.Text; 
 using System.Threading.Tasks;
-using MBCTech.RecipeShopper.Dbo.Domain.Entities;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Results.Recipe;
-using Tolitech.Modules.Shared.Domain.Commands;
-using Tolitech.Modules.Shared.Domain.Entities;
-using Tolitech.Modules.Shared.Notification;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Dbo.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Results.Recipe;
+using MBC.RecipeShopper.Shared.Domain.Commands;
 
-namespace MBCTech.RecipeShopper.Dbo.Domain.Services {
+using MBC.RecipeShopper.Shared.Infra;
+using MBC.RecipeShopper.Dbo; 
+
+namespace MBC.RecipeShopper.Dbo.Domain.Services {
     
     
     public interface IRecipeApplicationService {

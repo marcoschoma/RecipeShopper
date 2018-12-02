@@ -1,10 +1,11 @@
-﻿using MBCTech.RecipeShopper.Shared.Infra.Data.Transactions;
+﻿using MBC.RecipeShopper.Shared.Domain.Entities;
+using MBC.RecipeShopper.Shared.Infra.Data.Transactions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MBCTech.RecipeShopper.Shared.Infra.Data.Repositories
+namespace MBC.RecipeShopper.Shared.Infra.Data.Repositories
 {
     public abstract class Repository
     {
@@ -27,6 +28,21 @@ namespace MBCTech.RecipeShopper.Shared.Infra.Data.Repositories
         private void Configure()
         {
             //base.SetDatabase(_uow.DatabaseEnum);
+        }
+
+        public string GetSqlInsert(EntityInfo item, string v1, string table, bool v3, List<string> keys)
+        {
+            var insertSql = $"insert into {table} values ";
+            
+            throw new NotImplementedException();
+        }
+        public string GetSqlUpdate(EntityInfo item, string v1, string v2, List<string> list, List<string> ignoreColumns)
+        {
+            throw new NotImplementedException();
+        }
+        public string GetSqlDelete(string v1, string v2, List<string> list)
+        {
+            throw new NotImplementedException();
         }
     }
 }

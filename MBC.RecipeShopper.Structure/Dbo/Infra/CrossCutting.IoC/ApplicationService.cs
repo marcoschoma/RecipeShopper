@@ -1,14 +1,17 @@
-using MBCTech.RecipeShopper.Dbo.Application.Services;
-using MBCTech.RecipeShopper.Dbo.Domain.Services;
+using MBC.RecipeShopper.Dbo.Application.Services;
+using MBC.RecipeShopper.Dbo.Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MBCTech.RecipeShopper.Dbo.Infra.CrossCutting.IoC
+namespace MBC.RecipeShopper.Dbo.Infra.CrossCutting.IoC
 {
     internal class ApplicationService
 	{
 		public static void Register(IServiceCollection services)
 		{
-			services.AddTransient<IRecipeIngredientApplicationService, RecipeIngredientApplicationService>();
+            services.AddTransient<IAmountTypeApplicationService, AmountTypeApplicationService>();
+            services.AddTransient<IIngredientApplicationService, IngredientApplicationService>();
+            services.AddTransient<IRecipeApplicationService, RecipeApplicationService>();
+            services.AddTransient<IRecipeIngredientApplicationService, RecipeIngredientApplicationService>();
             services.AddTransient<IShoplistApplicationService, ShoplistApplicationService>();
             services.AddTransient<IShoplistIngredientApplicationService, ShoplistIngredientApplicationService>();
         }

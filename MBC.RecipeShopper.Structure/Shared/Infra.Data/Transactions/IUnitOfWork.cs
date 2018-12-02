@@ -2,7 +2,7 @@
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace MBCTech.RecipeShopper.Shared.Infra.Data.Transactions
+namespace MBC.RecipeShopper.Shared.Infra.Data.Transactions
 {
     public interface IUnitOfWork
     {

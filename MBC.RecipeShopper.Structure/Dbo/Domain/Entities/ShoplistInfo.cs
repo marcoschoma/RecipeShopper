@@ -1,12 +1,12 @@
 using System; 
 using System.Collections.Generic; 
 using System.Text; 
-using MBCTech.RecipeShopper.Shared.Domain.Entities;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Inputs.Shoplist;
-using MBCTech.RecipeShopper.Dbo.Domain.Scopes.Shoplist;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Shared.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Shoplist;
+using MBC.RecipeShopper.Dbo.Domain.Scopes.Shoplist;
+using MBC.RecipeShopper.Dbo; 
 
-namespace MBCTech.RecipeShopper.Dbo.Domain.Entities {
+namespace MBC.RecipeShopper.Dbo.Domain.Entities {
     
     
     public class ShoplistInfo : EntityInfo {
@@ -27,24 +27,18 @@ namespace MBCTech.RecipeShopper.Dbo.Domain.Entities {
         }
         
         public System.Nullable<int> Id {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public System.DateTime CreationDate {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public virtual ICollection<ShoplistIngredientInfo> ShoplistsIngredients {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         private void InitCollections() {

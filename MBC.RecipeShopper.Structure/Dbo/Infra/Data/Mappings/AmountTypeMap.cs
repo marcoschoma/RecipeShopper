@@ -1,13 +1,13 @@
 using System; 
 using System.Collections.Generic; 
 using System.Text; 
-using MBCTech.RecipeShopper.Dbo.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Dbo; 
 
-namespace MBCTech.RecipeShopper.Dbo.Infra.Data.Mappings.AmountType {
+namespace MBC.RecipeShopper.Dbo.Infra.Data.Mappings.AmountType {
     
     
     public class AmountTypeMap : IEntityTypeConfiguration<AmountTypeInfo> {

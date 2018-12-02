@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MBCTech.RecipeShopper.Shared.Settings
+namespace MBC.RecipeShopper.Shared.Settings
 {
     public sealed class AppSettings
     {

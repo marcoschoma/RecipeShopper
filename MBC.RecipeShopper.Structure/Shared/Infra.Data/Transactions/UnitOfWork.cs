@@ -1,4 +1,4 @@
-﻿using MBCTech.RecipeShopper.Shared.Settings;
+﻿using MBC.RecipeShopper.Shared.Settings;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,9 +7,9 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
 
-namespace MBCTech.RecipeShopper.Shared.Infra.Data.Transactions
+namespace MBC.RecipeShopper.Shared.Infra.Data.Transactions
 {
-    class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private DbConnection _connection;
         private DbTransaction _transaction;

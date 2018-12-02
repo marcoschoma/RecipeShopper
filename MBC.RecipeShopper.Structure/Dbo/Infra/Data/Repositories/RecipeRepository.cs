@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Text; 
 using System.Linq;
 using System.Threading.Tasks;
-using MBCTech.RecipeShopper.Dbo.Domain.Entities;
-using MBCTech.RecipeShopper.Dbo.Domain.Repositories;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Results.Recipe;
-using MBCTech.RecipeShopper.Dbo.Domain.Specs;
-using MBCTech.RecipeShopper.Dbo.Infra.Data.Contexts;
-using MBCTech.RecipeShopper.Shared.Infra.Data.Repositories;
-using MBCTech.RecipeShopper.Shared.Infra.Data.Transactions;
+using MBC.RecipeShopper.Dbo.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Repositories;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Results.Recipe;
+using MBC.RecipeShopper.Dbo.Domain.Specs;
+using MBC.RecipeShopper.Dbo.Infra.Data.Contexts;
+using MBC.RecipeShopper.Shared.Infra.Data.Repositories;
+using MBC.RecipeShopper.Shared.Infra.Data.Transactions;
 using Dapper;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
-using Tolitech.Modules.Shared.Domain.Commands;
-using Tolitech.Modules.Shared.Domain.Entities;
-using Tolitech.Modules.Shared.Notification;
-using Tolitech.Modules.Shared.Infra.Data.Extensions;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Shared.Domain.Commands;
 
-namespace MBCTech.RecipeShopper.Dbo.Infra.Data.Repositories {
+using MBC.RecipeShopper.Shared.Infra;
+using MBC.RecipeShopper.Dbo; 
+
+namespace MBC.RecipeShopper.Dbo.Infra.Data.Repositories {
     
     
     public class RecipeRepository : Repository, IRecipeRepository {
@@ -39,13 +38,12 @@ namespace MBCTech.RecipeShopper.Dbo.Infra.Data.Repositories {
 			var result = new NotificationResult();
 			try
 			{
-				string sql = GetSqlInsert(item, "Dbo", "Recipe", true, new List<string> { "Id" });
-				var id = (await _uow.Connection.QueryAsync<System.Int32>(sql, item, _uow.Transaction)).Single();
-				item.SetId(id);
+                await _context.AddAsync(item);
+				item.SetId(_context.SaveChanges());
 			}
 			catch(Exception ex)
 			{
-				result.AddError(ex);
+                result.AddError(ex);
 			}
 			
 			return result;
@@ -109,7 +107,6 @@ namespace MBCTech.RecipeShopper.Dbo.Infra.Data.Repositories {
 			
 			var count = await source.Where(outer).CountAsync();
 			var items = await source.Where(outer)
-			    .DynamicOrderBy(command.OrderBy)
 			    .Skip(command.SkipNumber)
 			    .Take(command.PageSize)
 			    .Select(RecipeSpecs.AsPageRecipeCommandResult)

@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Application\MBC.RecipeShopper.Shared.Application.csproj" />
     <ProjectReference Include="..\..\Shared\Domain\MBC.RecipeShopper.Shared.Domain.csproj" />
+    <ProjectReference Include="..\Domain\MBC.RecipeShopper.Dbo.Domain.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

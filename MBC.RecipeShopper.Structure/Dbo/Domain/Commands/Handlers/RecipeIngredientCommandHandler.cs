@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic; 
 using System.Text; 
 using System.Threading.Tasks;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Inputs.RecipeIngredient;
-using MBCTech.RecipeShopper.Dbo.Domain.Entities;
-using MBCTech.RecipeShopper.Dbo.Domain.Repositories;
-using Tolitech.Modules.Shared.Domain.Commands;
-using Tolitech.Modules.Shared.Notification;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.RecipeIngredient;
+using MBC.RecipeShopper.Dbo.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Repositories;
+using MBC.RecipeShopper.Shared.Domain.Commands;
+using MBC.RecipeShopper.Shared.Infra;
+using MBC.RecipeShopper.Dbo; 
 
-namespace MBCTech.RecipeShopper.Dbo.Domain.Commands.Handlers {
+namespace MBC.RecipeShopper.Dbo.Domain.Commands.Handlers {
     
     
     public class RecipeIngredientCommandHandler : ICommandHandler {

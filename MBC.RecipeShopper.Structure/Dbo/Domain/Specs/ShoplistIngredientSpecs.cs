@@ -1,16 +1,16 @@
 using System; 
 using System.Collections.Generic; 
 using System.Text; 
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Results.AmountType;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Results.Ingredient;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Results.Shoplist;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Results.AmountType;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Results.Ingredient;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Results.Shoplist;
 using System.Linq;
 using System.Linq.Expressions;
-using MBCTech.RecipeShopper.Dbo.Domain.Entities;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Results.ShoplistIngredient;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Dbo.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Results.ShoplistIngredient;
+using MBC.RecipeShopper.Dbo; 
 
-namespace MBCTech.RecipeShopper.Dbo.Domain.Specs {
+namespace MBC.RecipeShopper.Dbo.Domain.Specs {
     
     
     public class ShoplistIngredientSpecs {
@@ -22,12 +22,12 @@ namespace MBCTech.RecipeShopper.Dbo.Domain.Specs {
 					Shoplist = x.Shoplist == null ? null : new SelectListShoplistCommandResult
 					{
 						Id = x.Shoplist.Id,
-					}
+					},
 					Ingredient = x.Ingredient == null ? null : new SelectListIngredientCommandResult
 					{
 						Id = x.Ingredient.Id,
 						Description = x.Ingredient.Description,
-					}
+					},
 					AmountType = x.AmountType == null ? null : new SelectListAmountTypeCommandResult
 					{
 						Id = x.AmountType.Id,
@@ -42,12 +42,12 @@ namespace MBCTech.RecipeShopper.Dbo.Domain.Specs {
 					Shoplist = x.Shoplist == null ? null : new SelectListShoplistCommandResult
 					{
 						Id = x.Shoplist.Id,
-					}
+					},
 					Ingredient = x.Ingredient == null ? null : new SelectListIngredientCommandResult
 					{
 						Id = x.Ingredient.Id,
 						Description = x.Ingredient.Description,
-					}
+					},
 					AmountType = x.AmountType == null ? null : new SelectListAmountTypeCommandResult
 					{
 						Id = x.AmountType.Id,
@@ -62,12 +62,12 @@ namespace MBCTech.RecipeShopper.Dbo.Domain.Specs {
 					Shoplist = x.Shoplist == null ? null : new ShoplistCommandResult
 					{
 						Id = x.Shoplist.Id,
-					}
+					},
 					Ingredient = x.Ingredient == null ? null : new IngredientCommandResult
 					{
 						Id = x.Ingredient.Id,
 						Description = x.Ingredient.Description,
-					}
+					},
 					AmountType = x.AmountType == null ? null : new AmountTypeCommandResult
 					{
 						Id = x.AmountType.Id,

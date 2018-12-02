@@ -1,11 +1,11 @@
 using System; 
 using System.Collections.Generic; 
 using System.Text; 
-using MBCTech.RecipeShopper.Dbo.Domain.Entities;
-using Tolitech.Modules.Shared.Notification;
+using MBC.RecipeShopper.Dbo.Domain.Entities;
+using MBC.RecipeShopper.Shared.Infra;
 
 
-namespace MBCTech.RecipeShopper.Dbo.Domain.Scopes.RecipeIngredient {
+namespace MBC.RecipeShopper.Dbo.Domain.Scopes.RecipeIngredient {
     
     
     public static class RecipeIngredientScopes {

@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Infra.Data\MBC.RecipeShopper.Shared.Infra.Data.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Infra\MBC.RecipeShopper.Shared.Infra.csproj" />
     <ProjectReference Include="..\..\Domain\MBC.RecipeShopper.Dbo.Domain.csproj" />
   </ItemGroup>
 

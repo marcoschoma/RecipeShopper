@@ -1,7 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\MBC.RecipeShopper.Structure\Dbo\Infra\CrossCutting.IoC\MBC.RecipeShopper.Dbo.Infra.CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\..\MBC.RecipeShopper.Structure\Dbo\Infra\Data\MBC.RecipeShopper.Dbo.Infra.Data.csproj" />
+    <ProjectReference Include="..\..\MBC.RecipeShopper.Structure\Shared\Infra.Data\MBC.RecipeShopper.Shared.Infra.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="1.1.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
+  </ItemGroup>
 </Project>

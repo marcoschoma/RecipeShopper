@@ -1,8 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\MBC.RecipeShopper.Shared.Domain.csproj" />
     <ProjectReference Include="..\Settings\MBC.RecipeShopper.Shared.Settings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <PropertyGroup>

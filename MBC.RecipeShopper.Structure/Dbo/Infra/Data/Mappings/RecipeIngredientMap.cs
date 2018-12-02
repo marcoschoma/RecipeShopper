@@ -1,13 +1,13 @@
 using System; 
 using System.Collections.Generic; 
 using System.Text; 
-using MBCTech.RecipeShopper.Dbo.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Dbo; 
 
-namespace MBCTech.RecipeShopper.Dbo.Infra.Data.Mappings.RecipeIngredient {
+namespace MBC.RecipeShopper.Dbo.Infra.Data.Mappings.RecipeIngredient {
     
     
     public class RecipeIngredientMap : IEntityTypeConfiguration<RecipeIngredientInfo> {
@@ -19,8 +19,8 @@ namespace MBCTech.RecipeShopper.Dbo.Infra.Data.Mappings.RecipeIngredient {
 			builder.Property(x => x.AmountTypeId);
 			builder.Property(x => x.Amount);
 			builder.HasKey(x => x.Id);
-			builder.HasOne(x => x.Ingredient).WithMany(x => x.RecipeIngredients).HasForeignKey(x => x.IngredientId).OnDelete(DeleteBehavior.Restrict);
-			builder.HasOne(x => x.AmountType).WithMany(x => x.RecipeIngredients).HasForeignKey(x => x.AmountTypeId).OnDelete(DeleteBehavior.Restrict);
+			builder.HasOne(x => x.Ingredient).WithMany(x => x.RecipesIngredients).HasForeignKey(x => x.IngredientId).OnDelete(DeleteBehavior.Restrict);
+			builder.HasOne(x => x.AmountType).WithMany(x => x.RecipesIngredients).HasForeignKey(x => x.AmountTypeId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

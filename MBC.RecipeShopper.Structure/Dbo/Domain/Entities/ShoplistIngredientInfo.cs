@@ -1,12 +1,12 @@
 using System; 
 using System.Collections.Generic; 
 using System.Text; 
-using MBCTech.RecipeShopper.Shared.Domain.Entities;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Inputs.ShoplistIngredient;
-using MBCTech.RecipeShopper.Dbo.Domain.Scopes.ShoplistIngredient;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Shared.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.ShoplistIngredient;
+using MBC.RecipeShopper.Dbo.Domain.Scopes.ShoplistIngredient;
+using MBC.RecipeShopper.Dbo; 
 
-namespace MBCTech.RecipeShopper.Dbo.Domain.Entities {
+namespace MBC.RecipeShopper.Dbo.Domain.Entities {
     
     
     public class ShoplistIngredientInfo : EntityInfo {
@@ -25,59 +25,43 @@ namespace MBCTech.RecipeShopper.Dbo.Domain.Entities {
         }
         
         public System.Nullable<int> Id {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public System.Nullable<int> ShoplistId {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public System.Nullable<int> IngredientId {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public System.Nullable<int> AmountTypeId {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public System.Nullable<decimal> Amount {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public virtual ShoplistInfo Shoplist {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public virtual IngredientInfo Ingredient {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public virtual AmountTypeInfo AmountType {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public void SetId(int id) {

@@ -1,12 +1,12 @@
 using System; 
 using System.Collections.Generic; 
 using System.Text; 
-using MBCTech.RecipeShopper.Shared.Domain.Entities;
-using MBCTech.RecipeShopper.Dbo.Domain.Commands.Inputs.AmountType;
-using MBCTech.RecipeShopper.Dbo.Domain.Scopes.AmountType;
-using MBCTech.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Shared.Domain.Entities;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.AmountType;
+using MBC.RecipeShopper.Dbo.Domain.Scopes.AmountType;
+using MBC.RecipeShopper.Dbo;
 
-namespace MBCTech.RecipeShopper.Dbo.Domain.Entities {
+namespace MBC.RecipeShopper.Dbo.Domain.Entities {
     
     
     public class AmountTypeInfo : EntityInfo {
@@ -27,31 +27,23 @@ namespace MBCTech.RecipeShopper.Dbo.Domain.Entities {
         }
         
         public System.Nullable<int> Id {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public string Description {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public virtual ICollection<RecipeIngredientInfo> RecipesIngredients {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         public virtual ICollection<ShoplistIngredientInfo> ShoplistsIngredients {
-            get {
-            }
-            set {
-            }
+            get;
+            set;
         }
         
         private void InitCollections() {
