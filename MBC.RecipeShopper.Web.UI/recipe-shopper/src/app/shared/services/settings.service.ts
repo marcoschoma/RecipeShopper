@@ -8,7 +8,7 @@ export class SettingsService {
   private _decimalSeparator: string;
 
   constructor() {
-    this.locale = 'pt-BR';
+    this.locale = 'en-US';
   }
 
   get locale(): string {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlApi: 'http://localhost:44393/api'
+  urlApi: 'https://localhost:5001/api'
 };
 
 /*

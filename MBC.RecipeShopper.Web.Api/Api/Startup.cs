@@ -34,6 +34,7 @@ namespace MBC.RecipeShopper.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             IoC.Register(services);
+            services.AddCors();
 
             services.AddSwaggerGen(c =>
             {
@@ -61,6 +62,12 @@ namespace MBC.RecipeShopper.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Recipe Shopper API v1");
                 c.RoutePrefix = string.Empty;
+            });
+            app.UseCors(x =>
+            {
+                x.AllowAnyHeader();
+                x.AllowAnyMethod();
+                x.AllowAnyOrigin();
             });
 
             app.UseHttpsRedirection();

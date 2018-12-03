@@ -1,0 +1,7 @@
+<div class="col-md-8">
+  <label>Recipes available</label>
+  <select class="form-control" required>
+    <option value="">Select one recipe to add</option>
+    <option *ngFor="let item of availableRecipes" [value]="item.id">{{ item.name }}</option>
+  </select>
+</div>

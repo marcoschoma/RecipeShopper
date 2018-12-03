@@ -22,26 +22,26 @@ export class ShoplistService extends BaseService {
   }
 
   post(item: Shoplist): Observable<NotificationResult> {
-    const url = `${environment.urlApi}/dbo/shoplist`;
+    const url = `${environment.urlApi}/shoplist`;
     return this.httpClient.post<NotificationResult>(url, item)
       //.catchError(err => this.handleError(err));
   }
 
   put(id: number, item: Shoplist): Observable<NotificationResult> {
-    const url = `${this.urlApi}/dbo/shoplist/${id}`;
+    const url = `${this.urlApi}/shoplist/${id}`;
     return this.httpClient.put<NotificationResult>(url, item)
       //.catchError(err => this.handleError(err));
   }
 
   getById(id: number): Observable<Shoplist> {
-    const url = `${this.urlApi}/dbo/shoplist/${id}`;
-    return this.httpClient.get<Shoplist>(url, { headers: this.getAuthHeaders() })
+    const url = `${this.urlApi}/shoplist/${id}`;
+    return this.httpClient.get<Shoplist>(url)
       // .catch(err => super.handleError(err));
   }
 
   get(): Observable<Shoplist[]> {
-    const url = `${this.urlApi}/dbo/shoplist`;
-    return this.httpClient.get<Shoplist[]>(url, { headers: this.getAuthHeaders() })
+    const url = `${this.urlApi}/shoplist`;
+    return this.httpClient.get<Shoplist[]>(url)
       // .catch(err => this.handleError(err));
   }
 }
