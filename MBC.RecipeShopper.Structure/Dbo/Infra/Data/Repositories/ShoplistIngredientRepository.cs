@@ -38,10 +38,9 @@ namespace MBC.RecipeShopper.Dbo.Infra.Data.Repositories {
 			var result = new NotificationResult();
 			try
 			{
-				string sql = GetSqlInsert(item, "Dbo", "ShoplistIngredient", true, new List<string> { "Id" });
-				var id = (await _uow.Connection.QueryAsync<System.Int32>(sql, item, _uow.Transaction)).Single();
-				item.SetId(id);
-			}
+                await _context.AddAsync(item);
+                item.SetId(_context.SaveChanges());
+            }
 			catch(Exception ex)
 			{
 				result.AddError(ex);
@@ -55,9 +54,10 @@ namespace MBC.RecipeShopper.Dbo.Infra.Data.Repositories {
 			
 			try
 			{
-				string sql = GetSqlUpdate(item, "Dbo", "ShoplistIngredient", new List<string> { "Id" }, ignoreColumns: new List<string>() { "DataDeCadastro" });
-			    await _uow.Connection.ExecuteAsync(sql, item, _uow.Transaction);
-			}
+                _context.Attach(item);
+                _context.Entry(item).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
 			catch (Exception ex)
 			{
 			    result.AddError(ex);
@@ -70,9 +70,8 @@ namespace MBC.RecipeShopper.Dbo.Infra.Data.Repositories {
 			var result = new NotificationResult();
 			try
 			{
-				 string sql = GetSqlDelete("Dbo", "ShoplistIngredient", new List<string> { "Id" });
-			    await _uow.Connection.ExecuteAsync(sql, new { id }, _uow.Transaction);
-			}
+                await _uow.Connection.ExecuteAsync("delete from ShoplistIngredient where Id = @id", new { id }, _uow.Transaction);
+            }
 			catch (Exception ex)
 			{
 			    result.AddError(ex);

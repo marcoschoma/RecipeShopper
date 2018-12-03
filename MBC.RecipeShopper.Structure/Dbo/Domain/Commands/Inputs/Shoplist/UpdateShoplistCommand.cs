@@ -8,10 +8,12 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Shoplist {
     
     
     public class UpdateShoplistCommand : InputCommand, ICommand {
-        
-        public virtual int Id {
+
+        public virtual System.Nullable<int> RecipeId
+        {
             get;
             set;
         }
+        public int Id { get; set; }
     }
 }

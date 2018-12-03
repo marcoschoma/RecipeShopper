@@ -18,5 +18,6 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe {
             get;
             set;
         }
+        public int Id { get; set; }
     }
 }

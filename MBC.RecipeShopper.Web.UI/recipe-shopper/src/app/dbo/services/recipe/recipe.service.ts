@@ -42,6 +42,6 @@ export class RecipeService extends BaseService {
   get(): Observable<Recipe[]> {
     const url = `${this.urlApi}/dbo/recipe`;
     return this.httpClient.get<Recipe[]>(url, { headers: this.getAuthHeaders() })
-    // .catch(err => this.handleError(err));
+     //.catchError(err => this.handleError(err));
   }
 }

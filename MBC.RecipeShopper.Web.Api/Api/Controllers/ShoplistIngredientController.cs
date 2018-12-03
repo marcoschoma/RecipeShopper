@@ -1,26 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe;
+﻿using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.ShoplistIngredient;
 using MBC.RecipeShopper.Dbo.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace MBC.RecipeShopper.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecipeController : ControllerBase
+    public class ShoplistIngredientController : ControllerBase
     {
+        private readonly IShoplistIngredientApplicationService _service;
 
-        private readonly IRecipeApplicationService _service;
-
-        public RecipeController(IRecipeApplicationService service)
+        public ShoplistIngredientController(IShoplistIngredientApplicationService service)
         {
             _service = service;
         }
 
-        // GET api/Recipe
+        // GET api/ShoplistIngredient
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -30,7 +26,7 @@ namespace MBC.RecipeShopper.Api.Controllers
             return Ok(result);
         }
 
-        // GET api/Recipe/5
+        // GET api/ShoplistIngredient/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -40,24 +36,24 @@ namespace MBC.RecipeShopper.Api.Controllers
             return Ok(result);
         }
 
-        // POST api/Recipe
+        // POST api/ShoplistIngredient
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] InsertRecipeCommand command)
+        public async Task<IActionResult> Post([FromBody] InsertShoplistIngredientCommand command)
         {
             var result = await _service.InsertAsync(command);
             return Ok(result);
         }
 
-        // PUT api/Recipe/5
+        // PUT api/ShoplistIngredient/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] UpdateRecipeCommand command)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateShoplistIngredientCommand command)
         {
             command.Id = id;
             var result = await _service.UpdateAsync(command);
             return Ok(result);
         }
 
-        // DELETE api/Recipe/5
+        // DELETE api/ShoplistIngredient/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

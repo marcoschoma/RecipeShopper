@@ -6,32 +6,33 @@ namespace MBC.RecipeShopper.Shared.Infra
 {
     public class NotificationResult
     {
+        public bool IsValid { get; set; }
+        public IList<NotificationError> Errors { get; set; }
+        public IList<NotificationMessage> Messages { get; set; }
+        public object Data { get; set; }
+
         public NotificationResult()
         {
-            Errors = new List<Error>();
-            Messages = new List<string>();
+            Errors = new List<NotificationError>();
+            Messages = new List<NotificationMessage>();
             IsValid = true;
         }
-        public bool IsValid { get; set; }
-        public IList<Error> Errors { get; set; }
-        public IList<string> Messages { get; set; }
-        public int? Data { get; set; }
 
         public void AddError(Exception ex)
         {
-            Errors.Add(new Error(ex));
+            Errors.Add(new NotificationError(ex));
             IsValid = false;
 
         }
 
         public void AddMessage(string message)
         {
-            Messages.Add(message);
+            Messages.Add(new NotificationMessage(message));
         }
 
         public void AddErrorOnTop(string message)
         {
-            Errors.Insert(0, new Error(new Exception(message)));
+            Errors.Insert(0, new NotificationError(new Exception(message)));
             IsValid = false;
         }
 

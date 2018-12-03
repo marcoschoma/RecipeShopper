@@ -9,9 +9,11 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Ingredient {
     
     public class UpdateIngredientCommand : InputCommand, ICommand {
         
-        public virtual int Id {
+        public virtual string Description
+        {
             get;
             set;
         }
+        public int Id { get; set; }
     }
 }

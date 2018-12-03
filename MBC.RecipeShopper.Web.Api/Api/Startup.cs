@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using MBC.RecipeShopper.Shared.Settings;
@@ -7,6 +8,7 @@ using MBC.RecipeShopper.StartupConfiguration.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,6 +53,9 @@ namespace MBC.RecipeShopper.Api
             {
                 app.UseHsts();
             }
+
+            app.UseRequestLocalization(BuildLocalizationOptions());
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -65,6 +70,25 @@ namespace MBC.RecipeShopper.Api
         private void InitializeAppSettings()
         {
             AppSettings.ConnectionStrings.DefaultConnection = Configuration.GetConnectionString("DefaultConnection");
+        }
+
+        private RequestLocalizationOptions BuildLocalizationOptions()
+        {
+            var supportedCultures = new List<CultureInfo>
+            {
+                new CultureInfo("en-US"),
+                new CultureInfo("pt-BR"),
+                new CultureInfo("es-ES")
+            };
+
+            var options = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            };
+
+            return options;
         }
     }
 }

@@ -54,9 +54,10 @@ namespace MBC.RecipeShopper.Dbo.Infra.Data.Repositories {
 			
 			try
 			{
-				string sql = GetSqlUpdate(item, "Dbo", "Recipe", new List<string> { "Id" }, ignoreColumns: new List<string>() { "DataDeCadastro" });
-			    await _uow.Connection.ExecuteAsync(sql, item, _uow.Transaction);
-			}
+                _context.Attach(item);
+                _context.Entry(item).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
 			catch (Exception ex)
 			{
 			    result.AddError(ex);
@@ -69,9 +70,8 @@ namespace MBC.RecipeShopper.Dbo.Infra.Data.Repositories {
 			var result = new NotificationResult();
 			try
 			{
-				 string sql = GetSqlDelete("Dbo", "Recipe", new List<string> { "Id" });
-			    await _uow.Connection.ExecuteAsync(sql, new { id }, _uow.Transaction);
-			}
+                await _uow.Connection.ExecuteAsync("delete from Recipe where Id = @id", new { id }, _uow.Transaction);
+            }
 			catch (Exception ex)
 			{
 			    result.AddError(ex);

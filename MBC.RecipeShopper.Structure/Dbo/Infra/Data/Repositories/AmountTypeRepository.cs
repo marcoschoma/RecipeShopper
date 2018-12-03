@@ -19,111 +19,114 @@ using System.Threading.Tasks;
 namespace MBC.RecipeShopper.Dbo.Infra.Data.Repositories
 {
 
+    public class AmountTypeRepository : Repository, IAmountTypeRepository
+    {
 
-    public class AmountTypeRepository : Repository, IAmountTypeRepository {
-        
         private IUnitOfWork _uow;
-        
+
         private DboDataContext _context;
-        
-        public AmountTypeRepository(IUnitOfWork uow, DboDataContext context) : 
-                base(uow, context) {
-			_uow = uow;
-			_context = context;
+
+        public AmountTypeRepository(IUnitOfWork uow, DboDataContext context) :
+                base(uow, context)
+        {
+            _uow = uow;
+            _context = context;
         }
-        
-        public async Task<NotificationResult> InsertAsync(AmountTypeInfo item) {
-			var result = new NotificationResult();
-			try
-			{
-				string sql = GetSqlInsert(item, "Dbo", "AmountType", true, new List<string> { "Id" });
-				var id = (await _uow.Connection.QueryAsync<System.Int32>(sql, item, _uow.Transaction)).Single();
-				item.SetId(id);
-			}
-			catch(Exception ex)
-			{
-				result.AddError(ex);
-			}
-			
-			return result;
+
+        public async Task<NotificationResult> InsertAsync(AmountTypeInfo item)
+        {
+            var result = new NotificationResult();
+            try
+            {
+                await _context.AddAsync(item);
+                item.SetId(_context.SaveChanges());
+            }
+            catch (Exception ex)
+            {
+                result.AddError(ex);
+            }
+
+            return result;
         }
 
 
-        public async Task<NotificationResult> UpdateAsync(AmountTypeInfo item) {
-			var result = new NotificationResult();
-			
-			try
-			{
-				string sql = GetSqlUpdate(item, "Dbo", "AmountType", new List<string> { "Id" }, ignoreColumns: new List<string>() { "DataDeCadastro" });
-			    await _uow.Connection.ExecuteAsync(sql, item, _uow.Transaction);
-			}
-			catch (Exception ex)
-			{
-			    result.AddError(ex);
-			}
-			
-			return result;
+        public async Task<NotificationResult> UpdateAsync(AmountTypeInfo item)
+        {
+            var result = new NotificationResult();
+
+            try
+            {
+                _context.Attach(item);
+                _context.Entry(item).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                result.AddError(ex);
+            }
+
+            return result;
         }
 
-        
+        public async Task<NotificationResult> DeleteByIdAsync(int id)
+        {
+            var result = new NotificationResult();
+            try
+            {
+                await _uow.Connection.ExecuteAsync("delete from AmountType where Id = @id", new { id }, _uow.Transaction);
+            }
+            catch (Exception ex)
+            {
+                result.AddError(ex);
+            }
 
-        public async Task<NotificationResult> DeleteByIdAsync(int id) {
-			var result = new NotificationResult();
-			try
-			{
-				 string sql = GetSqlDelete("Dbo", "AmountType", new List<string> { "Id" });
-			    await _uow.Connection.ExecuteAsync(sql, new { id }, _uow.Transaction);
-			}
-			catch (Exception ex)
-			{
-			    result.AddError(ex);
-			}
-			
-			return result;
+            return result;
         }
 
-        
+        public async Task<AmountTypeCommandResult> GetByIdAsync(int id)
+        {
+            return await _context.AmountType.AsNoTracking()
+                .Where(x => x.Id == id)
+                .Select(AmountTypeSpecs.AsAmountTypeCommandResult)
+                .SingleOrDefaultAsync();
+        }
 
-        public async Task<AmountTypeCommandResult> GetByIdAsync(int id) {
-			return await _context.AmountType.AsNoTracking()
-			    .Where(x => x.Id == id)
-			    .Select(AmountTypeSpecs.AsAmountTypeCommandResult)
-			    .SingleOrDefaultAsync();
+        public async Task<IEnumerable<AmountTypeCommandResult>> GetAsync()
+        {
+            return await _context.AmountType.AsNoTracking()
+                .OrderBy(x => x.Description)
+                .Select(AmountTypeSpecs.AsAmountTypeCommandResult)
+                .ToListAsync();
         }
-        
-        public async Task<IEnumerable<AmountTypeCommandResult>> GetAsync() {
-			return await _context.AmountType.AsNoTracking()
-			    .OrderBy(x => x.Description)
-			    .Select(AmountTypeSpecs.AsAmountTypeCommandResult)
-			    .ToListAsync();
+
+        public async Task<PaginatedList<PageAmountTypeCommandResult>> GetPageAsync(PageAmountTypeCommand command)
+        {
+            var source = _context.AmountType.AsNoTracking().AsExpandable();
+            var outer = PredicateBuilder.New<AmountTypeInfo>(true);
+
+            if (!string.IsNullOrEmpty(command.TextToSearch))
+            {
+                var inner = PredicateBuilder.New<AmountTypeInfo>();
+                inner = inner.Start(AmountTypeSpecs.TextToSearch(command.TextToSearch));
+                outer = outer.And(inner);
+            }
+
+            var count = await source.Where(outer).CountAsync();
+            var items = await source.Where(outer)
+                .Skip(command.SkipNumber)
+                .Take(command.PageSize)
+                .Select(AmountTypeSpecs.AsPageAmountTypeCommandResult)
+                .ToListAsync();
+
+            return new PaginatedList<PageAmountTypeCommandResult>(items, count, command.PageNumber, command.PageSize);
         }
-        
-        public async Task<PaginatedList<PageAmountTypeCommandResult>> GetPageAsync(PageAmountTypeCommand command) {
-			var source = _context.AmountType.AsNoTracking().AsExpandable();
-			var outer = PredicateBuilder.New<AmountTypeInfo>(true);
-			
-			if (!string.IsNullOrEmpty(command.TextToSearch))
-			{
-			    var inner = PredicateBuilder.New<AmountTypeInfo>();
-			    inner = inner.Start(AmountTypeSpecs.TextToSearch(command.TextToSearch));
-			    outer = outer.And(inner);
-			}
-			
-			var count = await source.Where(outer).CountAsync();
-			var items = await source.Where(outer)
-			    .Skip(command.SkipNumber)
-			    .Take(command.PageSize)
-			    .Select(AmountTypeSpecs.AsPageAmountTypeCommandResult)
-			    .ToListAsync();
-			
-			return new PaginatedList<PageAmountTypeCommandResult>(items, count, command.PageNumber, command.PageSize);
-        }
-        
-        public async Task<IEnumerable<SelectListAmountTypeCommandResult>> GetSelectListAsync() {
-			return await _context.AmountType.AsNoTracking()
-			    .OrderBy(x => x.Description)
-			    .Select(AmountTypeSpecs.AsSelectListAmountTypeCommandResult)
-			    .ToListAsync();
+
+        public async Task<IEnumerable<SelectListAmountTypeCommandResult>> GetSelectListAsync()
+        {
+            return await _context.AmountType.AsNoTracking()
+                .OrderBy(x => x.Description)
+                .Select(AmountTypeSpecs.AsSelectListAmountTypeCommandResult)
+                .ToListAsync();
         }
     }
 }

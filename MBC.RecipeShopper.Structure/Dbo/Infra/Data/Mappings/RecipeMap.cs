@@ -14,10 +14,10 @@ namespace MBC.RecipeShopper.Dbo.Infra.Data.Mappings.Recipe {
         
         public void Configure(EntityTypeBuilder<RecipeInfo> builder) {
 			builder.ToTable("Recipe", "Dbo");
-			builder.Property(x => x.Id).IsRequired();
-			builder.Property(x => x.Name).HasMaxLength(100);
-			builder.Property(x => x.Steps).HasMaxLength(-1);
-			builder.HasKey(x => x.Id);
+			builder.Property(x => x.Id).IsRequired().HasColumnName("Id");
+			builder.Property(x => x.Name).HasMaxLength(100).HasColumnName("Name");
+            builder.Property(x => x.Steps).HasMaxLength(-1).HasColumnName("Steps");
+            builder.HasKey(x => x.Id).HasName("Id");
         }
     }
 }

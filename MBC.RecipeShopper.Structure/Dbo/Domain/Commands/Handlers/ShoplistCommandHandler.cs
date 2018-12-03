@@ -60,7 +60,6 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Handlers {
         
         public virtual async Task<NotificationResult> DeleteByIdAsync(int id) {
 			var result = new NotificationResult();
-			result.Add(await _shoplistIngredientRepository.DeleteByIdAsync(id));
 			result.Add(await _shoplistRepository.DeleteByIdAsync(id));
 			if (result.IsValid)
 			    result.AddMessage(Shared.Domain.Resources.Handler.DeleteSuccess_Message);

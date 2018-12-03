@@ -8,8 +8,10 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.AmountType {
     
     
     public class UpdateAmountTypeCommand : InputCommand, ICommand {
-        
-        public virtual int Id {
+
+        public int Id { get; set; }
+        public virtual string Description
+        {
             get;
             set;
         }

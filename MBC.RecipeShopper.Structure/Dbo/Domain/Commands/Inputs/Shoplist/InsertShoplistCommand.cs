@@ -8,7 +8,13 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Shoplist {
     
     
     public class InsertShoplistCommand : InputCommand, ICommand {
-        
+
+        public virtual System.Nullable<int> RecipeId
+        {
+            get;
+            set;
+        }
+
         public virtual System.DateTime CreationDate {
             get;
             set;
