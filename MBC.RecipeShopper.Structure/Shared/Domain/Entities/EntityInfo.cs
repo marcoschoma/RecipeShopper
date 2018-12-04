@@ -1,9 +1,6 @@
-﻿using MBC.RecipeShopper.Shared.Domain.Commands;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Reflection;
+using MBC.RecipeShopper.Shared.Domain.Commands;
 using MBC.RecipeShopper.Shared.Infra;
-using System.Reflection;
 
 namespace MBC.RecipeShopper.Shared.Domain.Entities
 {
@@ -13,13 +10,19 @@ namespace MBC.RecipeShopper.Shared.Domain.Entities
         {
             foreach (var propertyInfo in inputCommand.GetType().GetProperties())
             {
-                GetType()
-                    .GetProperty(propertyInfo.Name,
-                        BindingFlags.IgnoreCase |
-                        BindingFlags.Instance |
-                        BindingFlags.Public)
-                    .SetValue(this,
-                        propertyInfo.GetValue(inputCommand));
+                if (propertyInfo.GetValue(inputCommand) != null)
+                {
+                    var targetProperty = GetType()
+                        .GetProperty(propertyInfo.Name,
+                            BindingFlags.IgnoreCase |
+                            BindingFlags.Instance |
+                            BindingFlags.Public);
+                    if (targetProperty != null && targetProperty.PropertyType == propertyInfo.PropertyType)
+                    {
+                        targetProperty.SetValue(this,
+                                propertyInfo.GetValue(inputCommand));
+                    }
+                }
             }
         }
     }

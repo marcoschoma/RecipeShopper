@@ -81,8 +81,10 @@ namespace MBC.RecipeShopper.Dbo.Infra.Data.Repositories {
         }
         
         public async Task<RecipeCommandResult> GetByIdAsync(int id) {
-			return await _context.Recipe.AsNoTracking()
-			    .Where(x => x.Id == id)
+			return await _context.Recipe
+                .Include(x => x.RecipeIngredients)
+                .AsNoTracking()
+                .Where(x => x.Id == id)
 			    .Select(RecipeSpecs.AsRecipeCommandResult)
 			    .SingleOrDefaultAsync();
         }

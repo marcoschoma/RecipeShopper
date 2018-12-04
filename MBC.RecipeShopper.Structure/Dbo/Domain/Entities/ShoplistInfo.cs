@@ -10,7 +10,7 @@ namespace MBC.RecipeShopper.Dbo.Domain.Entities {
     
     
     public class ShoplistInfo : EntityInfo {
-        
+
         public ShoplistInfo() {
         }
         
@@ -25,15 +25,26 @@ namespace MBC.RecipeShopper.Dbo.Domain.Entities {
 			InitCollections();
 			this.InsertOrUpdateScopeValidate();
         }
-        
+
+        public ShoplistInfo(InsertShoplistWithIngredientsCommand command)
+        {
+            Map(command);
+            InitCollections();
+            foreach (var shoplistIngredientCommand in command.ShoplistsIngredients)
+            {
+                ShoplistsIngredients.Add(new ShoplistIngredientInfo(shoplistIngredientCommand));
+            }
+            this.InsertOrUpdateScopeValidate();
+        }
+
         public System.Nullable<int> Id {
             get;
-            set;
+            private set;
         }
         
         public System.DateTime CreationDate {
             get;
-            set;
+            private set;
         }
         
         public virtual ICollection<ShoplistIngredientInfo> ShoplistsIngredients {
@@ -42,7 +53,7 @@ namespace MBC.RecipeShopper.Dbo.Domain.Entities {
         }
         
         private void InitCollections() {
-			ShoplistsIngredients = new List<ShoplistIngredientInfo>();
+            ShoplistsIngredients = new List<ShoplistIngredientInfo>();
         }
         
         public void SetId(int id) {

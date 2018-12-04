@@ -1,6 +1,6 @@
 using System; 
 using System.Collections.Generic; 
-using System.Text; 
+using System.Text;
 using MBC.RecipeShopper.Shared.Domain.Entities;
 using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe;
 using MBC.RecipeShopper.Dbo.Domain.Scopes.Recipe;
@@ -28,17 +28,17 @@ namespace MBC.RecipeShopper.Dbo.Domain.Entities {
         
         public System.Nullable<int> Id {
             get;
-            set;
+            private set;
         }
         
         public string Name {
             get;
-            set;
+            private set;
         }
         
         public string Steps {
             get;
-            set;
+            private set;
         }
         
         public void SetId(int id) {
@@ -50,7 +50,8 @@ namespace MBC.RecipeShopper.Dbo.Domain.Entities {
             RecipeIngredients = new List<RecipeIngredientInfo>();
         }
 
-        public virtual ICollection<RecipeIngredientInfo> RecipeIngredients { get; set; }
+        public virtual ICollection<RecipeIngredientInfo> RecipeIngredients { get; private set; }
+
 
     }
 }

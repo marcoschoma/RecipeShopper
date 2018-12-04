@@ -15,7 +15,13 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Results.RecipeIngredient {
             get;
             set;
         }
-        
+
+        public System.Nullable<int> RecipeId
+        {
+            get;
+            set;
+        }
+
         public System.Nullable<int> IngredientId {
             get;
             set;

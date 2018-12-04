@@ -18,6 +18,7 @@ namespace MBC.RecipeShopper.Dbo.Infra.Data.Mappings.Recipe {
 			builder.Property(x => x.Name).HasMaxLength(100).HasColumnName("Name");
             builder.Property(x => x.Steps).HasMaxLength(-1).HasColumnName("Steps");
             builder.HasKey(x => x.Id).HasName("Id");
+            builder.HasMany(x => x.RecipeIngredients).WithOne(x => x.Recipe).HasForeignKey("RecipeId");
         }
     }
 }

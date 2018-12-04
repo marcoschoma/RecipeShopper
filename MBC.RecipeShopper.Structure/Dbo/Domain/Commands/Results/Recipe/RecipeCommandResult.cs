@@ -14,7 +14,7 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Results.Recipe {
             get;
             set;
         }
-        
+
         public string Name {
             get;
             set;

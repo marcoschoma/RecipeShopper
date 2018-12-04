@@ -44,4 +44,10 @@ export class ShoplistService extends BaseService {
     return this.httpClient.get<Shoplist[]>(url)
       // .catch(err => this.handleError(err));
   }
+
+  createFromRecipeIdList(ids: number[]): any {
+    const url = `${environment.urlApi}/createShoplistFromRecipes`;
+    return this.httpClient.post<NotificationResult>(url, ids)
+      //.catchError(err => this.handleError(err));
+  }
 }

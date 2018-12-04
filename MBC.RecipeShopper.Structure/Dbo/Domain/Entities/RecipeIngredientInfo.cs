@@ -26,12 +26,18 @@ namespace MBC.RecipeShopper.Dbo.Domain.Entities {
         
         public System.Nullable<int> Id {
             get;
-            set;
+            private set;
         }
-        
+
+        public System.Nullable<int> RecipeId
+        {
+            get;
+            private set;
+        }
+
         public System.Nullable<int> IngredientId {
             get;
-            set;
+            private set;
         }
         
         public System.Nullable<int> AmountTypeId {
@@ -53,7 +59,13 @@ namespace MBC.RecipeShopper.Dbo.Domain.Entities {
             get;
             set;
         }
-        
+
+        public virtual RecipeInfo Recipe
+        {
+            get;
+            set;
+        }
+
         public void SetId(int id) {
 			if (!Id.HasValue) Id = id;
         }

@@ -28,12 +28,12 @@ namespace MBC.RecipeShopper.Dbo.Domain.Entities {
         
         public System.Nullable<int> Id {
             get;
-            set;
+            private set;
         }
         
         public string Description {
             get;
-            set;
+            private set;
         }
         
         public virtual ICollection<RecipeIngredientInfo> RecipesIngredients {

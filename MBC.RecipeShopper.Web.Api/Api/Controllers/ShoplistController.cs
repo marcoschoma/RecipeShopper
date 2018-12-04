@@ -38,9 +38,9 @@ namespace MBC.RecipeShopper.Api.Controllers
 
         // POST api/Shoplist
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] InsertShoplistCommand command)
+        public async Task<IActionResult> Post([FromBody] InsertShoplistWithIngredientsCommand command)
         {
-            var result = await _service.InsertAsync(command);
+            var result = await _service.CreateShoplistWithIngredientsAsync(command);
             return Ok(result);
         }
 
@@ -60,5 +60,12 @@ namespace MBC.RecipeShopper.Api.Controllers
             var result = await _service.DeleteByIdAsync(id);
             return Ok(result);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> CreateShoplistWithIngredients(InsertShoplistWithIngredientsCommand command)
+        //{
+        //    var result = await _service.CreateShoplistWithIngredientsAsync(command);
+        //    return Ok(result);
+        //}
     }
 }

@@ -67,5 +67,30 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Handlers {
 			    result.AddErrorOnTop(Shared.Domain.Resources.Handler.DeleteError_Message);
 			return result;
         }
+
+        public async Task<NotificationResult> CreateShoplistWithIngredients(InsertShoplistWithIngredientsCommand command)
+        {
+            var result = new NotificationResult();
+            var item = new ShoplistInfo(command);
+            result.Add(item.GetNotificationResult());
+            if (!result.IsValid)
+                return result;
+            result.Add(await _shoplistRepository.InsertAsync(item));
+            if (result.IsValid)
+            {
+                result.Data = item.Id;
+                /*
+                foreach (var shoplistItem in command.ShoplistsIngredients)
+                {
+                    shoplistItem.SetId(item.Id.Value);
+                    await _shoplistIngredientRepository.InsertAsync(shoplistItem);
+                }*/
+
+                result.AddMessage(Shared.Domain.Resources.Handler.InsertSuccess_Message);
+            }
+            else
+                result.AddErrorOnTop(Shared.Domain.Resources.Handler.InsertError_Message);
+            return result;
+        }
     }
 }

@@ -28,5 +28,7 @@ namespace MBC.RecipeShopper.Dbo.Domain.Services {
         Task<PaginatedList<PageShoplistCommandResult>> GetPageAsync(PageShoplistCommand command);
         
         Task<IEnumerable<SelectListShoplistCommandResult>> GetSelectListAsync();
+
+        Task<NotificationResult> CreateShoplistWithIngredientsAsync(InsertShoplistWithIngredientsCommand command);
     }
 }

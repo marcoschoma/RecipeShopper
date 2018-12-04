@@ -42,6 +42,7 @@ namespace MBC.RecipeShopper.Dbo.Domain.Specs {
 					Shoplist = x.Shoplist == null ? null : new SelectListShoplistCommandResult
 					{
 						Id = x.Shoplist.Id,
+
 					},
 					Ingredient = x.Ingredient == null ? null : new SelectListIngredientCommandResult
 					{
