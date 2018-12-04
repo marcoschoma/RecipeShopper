@@ -1,16 +1,25 @@
 import { Injectable } from '@angular/core';
-import { ToastaService, ToastaConfig } from 'ngx-toasta';
+import { ToastaService, ToastaConfig, ToastOptions } from 'ngx-toasta';
 import { NotificationResult } from './../models/notification-result';
 
 declare const $: any;
 
 export class Message {
-
+  toastOptions: ToastOptions = {
+    title: "Hm..",
+    msg: "",
+    showClose: true,
+    timeout: 3000,
+  };
   constructor(private toastaService: ToastaService, private toastaConfig: ToastaConfig) {
+    toastaConfig.theme = 'bootstrap'
+
+
   }
   public success(result: NotificationResult): void {
     if (result && result.messages.length > 0) {
-      this.toastaService.success(result.messages[0].message);
+      this.toastOptions.msg = result.messages[0].message
+      this.toastaService.success(this.toastOptions);
     }
   }
 

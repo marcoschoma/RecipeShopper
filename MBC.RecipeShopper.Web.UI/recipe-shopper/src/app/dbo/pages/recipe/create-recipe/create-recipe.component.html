@@ -1,11 +1,11 @@
 <form novalidate>
   <div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-8 mb-3">
       <label>Recipe name</label>
       <input type="text" class="form-control" maxlength="100" [(ngModel)]="model.name" name="name" required />
     </div>
     <div class="col-md-8 mb-3">
-      <div class="row">
+      <div class="row" *ngFor="let ingredientAdded of ingredientsAdded; last as isLast; index as i">
         <div class="col-md-4">
           <label>Ingredients</label>
           <select class="form-control" required>
@@ -24,17 +24,23 @@
             <option *ngFor="let item of amountTypes" [value]="item.id">{{ item.description }}</option>
           </select>
         </div>
-        <div class="col-md-2 align-text-bottom">
-          <button class="btn btn-primary" (click)="addIngredient()">Add</button>
+        <div class="col-md-2">
+          <div *ngIf="ingredientsAdded.length > 1" class="col-md-2 align-text-bottom">
+            <button class="btn btn-danger" (click)="removeIngredient(i)">remove</button>
+          </div>
         </div>
+        <div *ngIf="isLast" class="col-md-2 align-text-bottom">
+            <button class="btn btn-primary" (click)="addIngredient()">Add more</button>
+          </div>
       </div>
     </div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-8 mb-3">
       <label>Steps</label>
-      <input type="text" class="form-control" maxlength="100" [(ngModel)]="model.steps" name="steps" required />
+      <textarea class="form-control" maxlength="100" [(ngModel)]="model.steps" name="steps" required>
+        </textarea>
     </div>
   </div>
-  <div class="form-actions col-md-6 mb-3">
+  <div class="form-actions col-md-8 mb-3 center">
     <button type="button" class="btn btn-primary mr-2" (click)="save()">
       Save
     </button>
@@ -43,3 +49,6 @@
     </button>
   </div>
 </form>
+<button type="button" class="btn btn-default mr-2" (click)="msg('alo')">
+    Cancel
+  </button>

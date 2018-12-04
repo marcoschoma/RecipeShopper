@@ -7,6 +7,11 @@ import { AmountType } from 'src/app/dbo/models/amount-type';
 import { Ingredient } from 'src/app/dbo/models/ingredient';
 import { RecipeService } from 'src/app/dbo/services/recipe/recipe.service';
 import { Recipe } from 'src/app/dbo/models/recipe';
+import 'rxjs/add/operator/takeUntil';
+import { HelperService } from 'src/app/shared/services/helper.service';
+import { Router } from '@angular/router';
+import { NotificationResult } from 'src/app/shared/models/notification-result';
+
 
 // import { MatExpansionModule } from '@angular/material/expansion';
 
@@ -21,7 +26,9 @@ export class CreateRecipeComponent implements OnInit {
     private recipeService: RecipeService,
     private ingredientService: IngredientService,
     private amountTypeService: AmountTypeService,
-    private recipeIngredientService: RecipeIngredientService) {
+    private recipeIngredientService: RecipeIngredientService,
+    private helperService: HelperService,
+    private router: Router) {
   }
   @Input() model: Recipe = {} as Recipe
   ingredientsAdded: RecipeIngredient[] = []
@@ -30,18 +37,44 @@ export class CreateRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.ingredientService.get().subscribe(data => {
-      this.ingredients = data;
+      this.ingredients = data
     })
     this.amountTypeService.get().subscribe(data => {
-      this.amountTypes = data;
+      this.amountTypes = data
     })
+    this.addIngredient()
   }
+  addIngredient() {
+    this.ingredientsAdded.push({} as RecipeIngredient)
+  }
+  removeIngredient(index) {
+    this.ingredientsAdded.splice(index, 1)
+  }
+  // save() {
+  //   console.log('save?');
 
-  save() {
-    this.recipeService.post(this.model)
-    this.ingredientsAdded.forEach(ingredient => {
-      this.recipeIngredientService.post(ingredient);
-    });
+  //   this.recipeService.post(this.model)
+  //   this.ingredientsAdded.forEach(ingredient => {
+  //     this.recipeIngredientService.post(ingredient)
+  //   });
+  // }
+
+  msg(s){
+    this.helperService.message.success({ messages: [s] } as NotificationResult);
+  }
+  save(): void {
+    this.model.RecipeIngredients = this.ingredientsAdded
+    this.recipeService
+      .post(this.model)
+      //.takeUntil(this.ngUnsubscribe)
+      .subscribe(result => {
+        if (result.isValid) {
+          this.helperService.message.success(result);
+          this.router.navigate(['/recipe', { id: result.data }]);
+        } else {
+          this.helperService.message.error(result);
+        }
+      });
   }
 
 }
