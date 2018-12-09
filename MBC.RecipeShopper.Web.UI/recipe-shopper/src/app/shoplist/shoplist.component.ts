@@ -10,11 +10,23 @@ import { Shoplist } from './models/shoplist.model';
 export class ShoplistComponent implements OnInit {
 
   shoplists: Shoplist[]
-  constructor(private shoplist: ShoplistService) { }
+  constructor(private shoplistService: ShoplistService) { }
 
   ngOnInit() {
-    this.shoplist.get().subscribe(shoplists =>
+    this.load()
+  }
+  load() {
+    this.shoplistService.get().subscribe(shoplists =>
       this.shoplists = shoplists)
+  }
+  remove(id) {
+    this.shoplistService.delete(id).subscribe(result => {
+      if(result.isValid)
+        this.load()
+      else 
+        alert(result.errors.map(err => err.message).join(', '))
+    }
+    )
   }
 
 }

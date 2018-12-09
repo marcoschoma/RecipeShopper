@@ -14,9 +14,21 @@ export class ListComponent implements OnInit {
   constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
+    this.load()
+  }
+  load() {
     this.recipeService.get().subscribe(recipes => {
       this.recipes = recipes
     })
   }
 
+  remove(id) {
+    this.recipeService.delete(id).subscribe(result => {
+      if(result.isValid) {
+        this.load()
+      } else {
+        alert(result.errors.map(err => err.message).join(', '))
+      }
+    })
+  }
 }

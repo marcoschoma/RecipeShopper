@@ -35,7 +35,13 @@ export class ShoplistService {
   }
 
   createFromRecipeIdList(ids: number[]): Observable<NotificationResult> {
-    const url = `${environment.urlApi}/createShoplistFromRecipes`;
-    return this.httpClient.post<NotificationResult>(url, ids)
+    console.log(ids)
+    const url = `${environment.urlApi}/shoplist/createShoplistFromRecipes`;
+    return this.httpClient.post<NotificationResult>(url, { RecipeId: ids })
+  }
+
+  delete(id): Observable<NotificationResult> {
+    const url = `${environment.urlApi}/shoplist/${id}`;
+    return this.httpClient.delete<NotificationResult>(url)
   }
 }

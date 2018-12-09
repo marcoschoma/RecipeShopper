@@ -62,10 +62,10 @@ namespace MBC.RecipeShopper.Api.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> createShoplistFromRecipes(CreateShoplistFromRecipeIdCommand command)
+        [HttpPost("CreateShoplistFromRecipes")]
+        public async Task<IActionResult> CreateShoplistFromRecipes(CreateShoplistFromRecipeIdCommand command)
         {
-            var result = await _service.CreateShoplistWithIngredientsAsync
+            var result = await _service.CreateShoplistFromRecipesAsync(command);
             return Ok(result);
         }
     }

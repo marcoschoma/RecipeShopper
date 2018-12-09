@@ -1,17 +1,20 @@
-<h1>Shoplists</h1>
+<h1>Shoplists!</h1>
 <a href="/create-shoplist" class="btn btn-primary">Create shoplist</a>
 <div class="card-columns">
-    <div class="card" *ngFor="let item of shoplists">
-      <h5 class="card-header">
-        {{item.creationDate | date}}
-      </h5>
-      <div class="card-body">
-        <ul class="list-group list-group-flush" *ngFor="let shoplistIngredient of item.shoplistIngredients">
-          <li class="list-group-item">
-            {{shoplistIngredient.amount}} {{shoplistIngredient.amountType.description}}
-            {{shoplistIngredient.ingredient.description}}
-          </li>
-        </ul>
+  <div class="card" *ngFor="let item of shoplists">
+    <div class="card-header">
+      {{item.creationDate | date}}
+      <div class="float-right clickable">
+        <span (click)="remove(item.id)" class="close-icon" data-effect="fadeOut"><i class="fa fa-times"></i></span>
       </div>
     </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush" *ngFor="let shoplistIngredient of item.shoplistIngredients">
+        <li class="list-group-item">
+          {{shoplistIngredient.amount}} {{shoplistIngredient.amountType.description}}
+          {{shoplistIngredient.ingredient.description}}
+        </li>
+      </ul>
+    </div>
   </div>
+</div>

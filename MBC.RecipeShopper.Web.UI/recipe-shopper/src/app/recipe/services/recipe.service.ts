@@ -15,6 +15,11 @@ export class RecipeService {
   constructor(private httpClient: HttpClient) {
   }
 
+  delete(id): Observable<NotificationResult> {
+    const url = `${environment.urlApi}/recipe/${id}`;
+    return this.httpClient.delete<NotificationResult>(url)
+  }
+
   get(): Observable<Recipe[]> {
     const url = `${environment.urlApi}/recipe`;
     return this.httpClient.get<Recipe[]>(url)

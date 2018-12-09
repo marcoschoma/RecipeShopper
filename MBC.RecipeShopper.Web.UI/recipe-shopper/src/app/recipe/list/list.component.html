@@ -1,9 +1,12 @@
-<h2>Recipes in database</h2>
+<a href="/create-recipe" class="btn btn-primary">Create recipe</a>
 <div class="card-columns">
   <div class="card" *ngFor="let item of recipes">
-    <h5 class="card-header">
+    <div class="card-header">
       {{item.name}}
-    </h5>
+      <div class="float-right clickable">
+        <span (click)="remove(item.id)" class="close-icon" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+      </div>
+    </div>
     <div class="card-body">
       <h5 class="card-title"></h5>
       <p>{{item.steps}}</p>
@@ -15,5 +18,4 @@
       </ul>
     </div>
   </div>
-  <a href="/create-recipe" class="btn btn-primary">Create recipe</a>
 </div>
