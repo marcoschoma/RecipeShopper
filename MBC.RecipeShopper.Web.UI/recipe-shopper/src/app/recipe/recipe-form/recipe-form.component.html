@@ -1,0 +1,29 @@
+<form [formGroup]="recipeForm">
+  <div class="col-md-8 mb-3 form-group">
+    <label>Recipe name</label>
+    <input type="text" formControlName="name" placeholder="Enter name" class="form-control" maxlength="100" required />
+  </div>
+  <div class="col-md-8 mb-3 form-group">
+    <label>Ingredients</label>
+    <div class="row col-md-12 align-items-end" *ngFor="let recipeIngredient of recipeIngredients?.controls; let i = index">
+      <recipe-recipeIngredient [index]="i" [ingredients]="ingredients" [amountTypes]="amountTypes"
+         [recipeIngredientForm]="recipeIngredient" (deleteRecipeIngredient)="deleteRecipeIngredient($event)"></recipe-recipeIngredient>
+    </div>
+    <div>
+      <button type="button" class="btn btn-secondary mr-2" (click)="addRecipeIngredient()">Add Ingredient</button>
+    </div>
+  </div>
+  <div class="col-md-8 mb-3 form-group">
+    <label>Steps</label>
+    <textarea class="form-control" formControlName="steps" placeholder="Steps to reproduce recipe" rows=4 maxlength="100"
+      required></textarea>
+  </div>
+  <div class="col-md-8 mb-3 form-group">
+    <button type="button" class="btn btn-primary mr-2" (click)="saveRecipe()">
+      Save
+    </button>
+    <a href="/recipe" class="btn btn-secondary mr-2">
+      Cancel
+    </a>
+  </div>
+</form>

@@ -79,13 +79,17 @@ namespace MBC.RecipeShopper.Dbo.Infra.Data.Repositories
         
         public async Task<ShoplistCommandResult> GetByIdAsync(int id) {
 			return await _context.Shoplist.AsNoTracking()
-			    .Where(x => x.Id == id)
+                .Include(s => s.ShoplistsIngredients)
+                .Where(x => x.Id == id)
 			    .Select(ShoplistSpecs.AsShoplistCommandResult)
 			    .SingleOrDefaultAsync();
         }
         
         public async Task<IEnumerable<ShoplistCommandResult>> GetAsync() {
-			return await _context.Shoplist.AsNoTracking()
+			return await _context.Shoplist
+                .Include(s => s.ShoplistsIngredients)
+                .AsNoTracking()
+                .OrderByDescending(si => si.Id)
 			    .Select(ShoplistSpecs.AsShoplistCommandResult)
 			    .ToListAsync();
         }

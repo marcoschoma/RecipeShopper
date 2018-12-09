@@ -30,5 +30,7 @@ namespace MBC.RecipeShopper.Dbo.Domain.Services {
         Task<IEnumerable<SelectListShoplistCommandResult>> GetSelectListAsync();
 
         Task<NotificationResult> CreateShoplistWithIngredientsAsync(InsertShoplistWithIngredientsCommand command);
+
+        Task<NotificationResult> CreateShoplistFromRecipesAsync(CreateShoplistFromRecipeIdCommand command);
     }
 }

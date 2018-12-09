@@ -1,0 +1,22 @@
+<form [formGroup]="recipeIngredientForm" class="form-inline">
+  <div class="form-group mb-3 ml-3">
+    <select class="form-control" formControlName="ingredientId" required>
+      <option value="">Ingredient</option>
+      <option *ngFor="let item of ingredients"
+        [value]="item.id">{{ item.description }}</option>
+    </select>
+  </div>
+  <div class="form-group mb-3 ml-3">
+    <input type="text" formControlName="amount" placeholder="Amount (0.00)" class="form-control" mask="0*.00" maxlength="100"
+      required />
+  </div>
+  <div class="form-group mb-3 ml-3">
+    <select class="form-control" formControlName="amountTypeId" required>
+      <option value="">Type</option>
+      <option *ngFor="let item of amountTypes" [value]="item.id">{{ item.description }}</option>
+    </select>
+  </div>
+  <div class="mb-3 ml-3">
+    <button class="btn btn-danger" (click)="delete()">remove</button>
+  </div>
+</form>

@@ -1,0 +1,24 @@
+<div class="col-md-5">
+  <label>Ingredient</label>
+  <select class="form-control" required>
+    <option value="">Select one ingredient</option>
+    <option *ngFor="let item of ingredients" [(ngModel)]="ingredientAdded.ingredientId" name="ingredientAdded.ingredientId"
+      [value]="item.id">{{ item.description }}</option>
+  </select>
+</div>
+<div class="col-md-3">
+  <label>Amount</label>
+  <input type="text" placeholder="0.00" class="form-control" mask="0*.00" maxlength="100" required />
+</div>
+<div class="col-md-3">
+  <label>Type</label>
+  <select class="form-control" required>
+    <option value="">Amount type</option>
+    <option *ngFor="let item of amountTypes" [value]="item.id">{{ item.description }}</option>
+  </select>
+</div>
+<div class="col-md-1">
+  <div *ngIf="ingredientsAdded.length > 1" class="col-md-2 align-text-bottom">
+    <button class="btn btn-danger" (click)="removeIngredient(i)">remove</button>
+  </div>
+</div>

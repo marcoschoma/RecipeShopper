@@ -69,5 +69,10 @@ namespace MBC.RecipeShopper.Dbo.Domain.Entities {
         public void SetId(int id) {
 			if (!Id.HasValue) Id = id;
         }
+        public void SetRecipeId(int recipeId)
+        {
+            if (!RecipeId.HasValue) RecipeId = recipeId;
+        }
+
     }
 }

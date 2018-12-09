@@ -1,0 +1,19 @@
+<h2>Recipes in database</h2>
+<div class="card-columns">
+  <div class="card" *ngFor="let item of recipes">
+    <h5 class="card-header">
+      {{item.name}}
+    </h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+      <p>{{item.steps}}</p>
+      <ul class="list-group list-group-flush" *ngFor="let recipeIngredient of item.recipeIngredients">
+        <li class="list-group-item">
+          {{recipeIngredient.amount}} {{recipeIngredient.amountType.description}}
+          {{recipeIngredient.ingredient.description}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <a href="/create-recipe" class="btn btn-primary">Create recipe</a>
+</div>

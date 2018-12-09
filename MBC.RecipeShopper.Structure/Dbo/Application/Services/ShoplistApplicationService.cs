@@ -15,6 +15,7 @@ using MBC.RecipeShopper.Dbo;
 using MBC.RecipeShopper.Shared.Application;
 using MBC.RecipeShopper.Dbo.Domain.Commands.Results.ShoplistIngredient;
 using System;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.ShoplistIngredient;
 
 namespace MBC.RecipeShopper.Dbo.Application.Services
 {
@@ -24,14 +25,17 @@ namespace MBC.RecipeShopper.Dbo.Application.Services
     {
 
         private IShoplistRepository _repository;
+        private IRecipeRepository _recipeRepository;
 
         private ShoplistCommandHandler _handler;
 
-        public ShoplistApplicationService(IUnitOfWork uow, IShoplistRepository repository, ShoplistCommandHandler handler) :
+        public ShoplistApplicationService(IUnitOfWork uow, IShoplistRepository repository, ShoplistCommandHandler handler,
+            IRecipeRepository recipeRepository) :
                 base(uow)
         {
             this._handler = handler;
             this._repository = repository;
+            this._recipeRepository = recipeRepository;
         }
 
         public virtual async Task<NotificationResult> InsertAsync(InsertShoplistCommand command)
@@ -79,6 +83,36 @@ namespace MBC.RecipeShopper.Dbo.Application.Services
         {
             BeginTransaction();
             var result = await _handler.CreateShoplistWithIngredients(command);
+            return Commit(result);
+        }
+
+        public async Task<NotificationResult> CreateShoplistFromRecipesAsync(CreateShoplistFromRecipeIdCommand command)
+        {
+            var ingredientList = new List<InsertShoplistIngredientCommand>();
+            foreach (var recipeId in command.RecipeId)
+            {
+                ingredientList.AddRange(
+                    (await _recipeRepository.GetByIdAsync(recipeId))
+                    .RecipeIngredients.Select(ri => new InsertShoplistIngredientCommand() {
+                        Amount = ri.Amount,
+                        AmountTypeId = ri.AmountTypeId,
+                        IngredientId = ri.IngredientId
+                    }).AsEnumerable());
+            }
+            //soh agrupar e BOA
+            BeginTransaction();
+            var result = await _handler.CreateShoplistWithIngredients(new InsertShoplistWithIngredientsCommand()
+            {
+                CreationDate = DateTime.Now,
+                ShoplistsIngredients = ingredientList.GroupBy(i => new { i.IngredientId, i.AmountTypeId },
+                    i => i.Amount
+                ).Select(si => new InsertShoplistIngredientCommand()
+                {
+                    IngredientId = si.Key.IngredientId,
+                    AmountTypeId = si.Key.AmountTypeId,
+                    Amount = si.Sum()
+                }).ToList()
+            });
             return Commit(result);
         }
     }

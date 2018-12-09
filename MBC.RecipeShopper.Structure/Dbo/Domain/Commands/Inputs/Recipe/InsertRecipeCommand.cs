@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic; 
 using System.Text; 
 using MBC.RecipeShopper.Shared.Domain.Commands;
-using MBC.RecipeShopper.Dbo; 
+using MBC.RecipeShopper.Dbo;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.RecipeIngredient;
 
 namespace MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe {
     
@@ -18,5 +19,8 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Inputs.Recipe {
             get;
             set;
         }
+
+        public virtual ICollection<InsertRecipeIngredientCommand> RecipeIngredients { get; set; }
+
     }
 }

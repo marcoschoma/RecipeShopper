@@ -17,10 +17,13 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Handlers
     {
 
         private IRecipeRepository _recipeRepository;
+        private IRecipeIngredientRepository _recipeIngredientRepository;
 
-        public RecipeCommandHandler(IRecipeRepository recipeRepository)
+        public RecipeCommandHandler(IRecipeRepository recipeRepository,
+            IRecipeIngredientRepository recipeIngredientRepository)
         {
             _recipeRepository = recipeRepository;
+            _recipeIngredientRepository = recipeIngredientRepository;
         }
 
         public virtual async Task<NotificationResult> InsertAsync(InsertRecipeCommand command)
@@ -31,8 +34,19 @@ namespace MBC.RecipeShopper.Dbo.Domain.Commands.Handlers
             if (!result.IsValid)
                 return result;
             result.Add(await _recipeRepository.InsertAsync(item));
+
             if (result.IsValid)
             {
+                if (command.RecipeIngredients != null && command.RecipeIngredients.Count > 0)
+                {
+                    foreach (var recipeIngredientCommand in command.RecipeIngredients)
+                    {
+                        var recipeIngredient = new RecipeIngredientInfo(recipeIngredientCommand);
+                        recipeIngredient.SetRecipeId(item.Id.Value);
+                        result.Add(await _recipeIngredientRepository.InsertAsync(recipeIngredient));
+                    }   
+                }
+
                 result.Data = item.Id;
                 result.AddMessage(Shared.Domain.Resources.Handler.InsertSuccess_Message);
             }

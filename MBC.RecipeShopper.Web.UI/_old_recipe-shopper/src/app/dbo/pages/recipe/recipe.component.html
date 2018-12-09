@@ -1,0 +1,41 @@
+<h2>Recipes in database</h2>
+<div class="card-columns">
+  <div class="card" *ngFor="let item of items">
+    <div class="card-body">
+      <h5 class="card-title">{{item.name}}</h5>
+      <p>{{item.steps}}</p>
+      <ul class="list-group list-group-flush" *ngFor="let recipeIngredient of item.recipeIngredients">
+        <li class="list-group-item">
+            {{recipeIngredient.amount}} {{recipeIngredient.amountType.description}} {{recipeIngredient.ingredient.description}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- 
+<table class="table table-responsive table-striped table-vcenter">
+  <colgroup>
+    <col style="width: 15%" />
+    <col style="width: 35%" />
+    <col style="width: 35%" />
+    <col style="width: 15%" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>#id</th>
+      <th>recipe name</th>
+      <th>steps to reproduce</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items" (click)="ele.class = ele.class == 'showChildren' ? '' :  'showChildren'"
+      [ngClass]="{ hideChildren : ele.class !== 'showChildren' }" #ele>
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.steps}}</td>
+      <td><button (click)="details()" class="btn btn-info">Details</button></td>
+    </tr>
+  </tbody>
+</table> -->
+<a href="/create-recipe" class="btn btn-primary">Create recipe</a>

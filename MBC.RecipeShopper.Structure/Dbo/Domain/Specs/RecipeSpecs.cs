@@ -4,6 +4,8 @@ using System;
 using System.Linq.Expressions;
 using System.Linq;
 using MBC.RecipeShopper.Dbo.Domain.Commands.Results.RecipeIngredient;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Results.Ingredient;
+using MBC.RecipeShopper.Dbo.Domain.Commands.Results.AmountType;
 
 namespace MBC.RecipeShopper.Dbo.Domain.Specs
 {
@@ -35,6 +37,14 @@ namespace MBC.RecipeShopper.Dbo.Domain.Specs
                 Amount = ri.Amount,
                 AmountTypeId = ri.AmountTypeId,
                 IngredientId = ri.IngredientId,
+                Ingredient = ri.Ingredient == null ? null : new IngredientCommandResult
+                {
+                    Description = ri.Ingredient.Description
+                },
+                AmountType = ri.AmountType == null ? null : new AmountTypeCommandResult
+                {
+                    Description = ri.AmountType.Description
+                }
             }).ToList()
         };
 
