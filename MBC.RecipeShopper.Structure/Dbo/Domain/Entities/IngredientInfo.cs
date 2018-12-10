@@ -22,6 +22,7 @@ namespace MBC.RecipeShopper.Dbo.Domain.Entities {
         
         public IngredientInfo(UpdateIngredientCommand command) {
 			Map(command);
+            this.Id = command.Id;
 			InitCollections();
 			this.InsertOrUpdateScopeValidate();
         }

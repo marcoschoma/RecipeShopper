@@ -1,4 +1,8 @@
-﻿if object_id('ShoplistIngredient', 'u') is not null
+﻿create database RecipeShopper
+go
+use RecipeShopper
+go
+if object_id('ShoplistIngredient', 'u') is not null
     drop table ShoplistIngredient
 go
 if object_id('RecipeIngredient', 'u') is not null
@@ -38,8 +42,6 @@ create table ShoplistIngredient (
 	amount decimal
 )
 
-
-
 create table Recipe (
 	id int identity(1,1) primary key,
 	name varchar(100),
@@ -48,6 +50,7 @@ create table Recipe (
 
 create table RecipeIngredient (
 	id int identity(1,1) primary key,
+	recipeId int foreign key references Recipe(id),
 	ingredientId int foreign key references Ingredient(id),
 	amountTypeId int foreign key references AmountType(id),
 	amount decimal

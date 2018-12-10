@@ -1,0 +1,25 @@
+<h2>Ingredients</h2>
+<a href="/create-ingredient" class="btn btn-primary">Create ingredient</a>
+<table class="table table-striped">
+  <colgroup>
+    <col style="width: 10%" />
+    <col style="width: 70%" />
+    <col style="width: 20%" />
+  </colgroup>
+  <thead>
+    <th>Id</th>
+    <th>Description</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ingredient of ingredients">
+      <td>{{ingredient.id}}</td>
+      <td>{{ingredient.description}}</td>
+      <td class="align-center">
+        <a class="btn btn-secondary" href="/edit-ingredient/{{ingredient.id}}">edit</a>
+        &nbsp;
+        <button class="btn btn-danger" (click)="remove(ingredient.id)">remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

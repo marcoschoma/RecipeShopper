@@ -1,0 +1,8 @@
+<h2>Ingredients</h2>
+<h5 *ngIf="ingredientId">Id: {{ingredientId}}</h5>
+<div class="form-group">
+  <label>Description</label>
+  <input type="text" name="description" [(ngModel)]="description" placeholder="Enter recipe description" class="form-control" />
+</div>
+<button type="button" class="btn btn-primary" (click)="save()">Ok</button>
+<a href="/ingredient" class="btn btn-secondary">Cancel</a>
