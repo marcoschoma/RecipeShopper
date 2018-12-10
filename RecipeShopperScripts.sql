@@ -50,7 +50,7 @@ create table Recipe (
 
 create table RecipeIngredient (
 	id int identity(1,1) primary key,
-	recipeId int foreign key references Recipe(id),
+	recipeId int foreign key references Recipe(id) on delete cascade,
 	ingredientId int foreign key references Ingredient(id),
 	amountTypeId int foreign key references AmountType(id),
 	amount decimal
